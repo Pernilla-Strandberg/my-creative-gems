@@ -29,12 +29,16 @@ const ProfileEditForm = () => {
     name: "",
     content: "",
     image: "",
+    facebookUrl: "",
+    twitterUrl: "",
+    tiktokUrl: "",
   });
-  const { name, content, image } = profileData;
 
+  const { name, content, image } = profileData;
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+
     const handleMount = async () => {
       if (currentUser?.profile_id?.toString() === id) {
         try {
@@ -50,7 +54,8 @@ const ProfileEditForm = () => {
       }
     };
 
-    handleMount();
+    handleMount()
+
   }, [currentUser, history, id]);
 
   const handleChange = (event) => {
@@ -65,7 +70,10 @@ const ProfileEditForm = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("content", content);
-
+    formData.append("facebookUrl", profileData.facebookUrl);
+    formData.append("twitterUrl", profileData.twitterUrl);
+    formData.append("tiktokUrl", profileData.tiktokUrl);
+  
     if (imageFile?.current?.files[0]) {
       formData.append("image", imageFile?.current?.files[0]);
     }
@@ -93,6 +101,37 @@ const ProfileEditForm = () => {
           onChange={handleChange}
           name="content"
           rows={7}
+        />
+      </Form.Group>
+
+      {/* Social media icons and urls */}
+      <Form.Group>
+        <Form.Label>Facebook Profile URL</Form.Label>
+        <Form.Control
+          type="text"
+          value={profileData.facebookUrl}
+          onChange={(e) => handleChange(e)}
+          name="facebookUrl"
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Twitter Profile URL</Form.Label>
+        <Form.Control
+          type="text"
+          value={profileData.twitterUrl}
+          onChange={(e) => handleChange(e)}
+          name="twitterUrl"
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>TikTok Profile URL</Form.Label>
+        <Form.Control
+          type="text"
+          value={profileData.tiktokUrl}
+          onChange={(e) => handleChange(e)}
+          name="tiktokUrl"
         />
       </Form.Group>
 

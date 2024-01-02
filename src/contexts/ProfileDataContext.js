@@ -82,7 +82,7 @@ export const ProfileDataProvider = ({ children }) => {
 
     handleMount();
   }, [currentUser]);
-
+console.log("profileData", profileData)
   return (
     <ProfileDataContext.Provider value={profileData}>
       <SetProfileDataContext.Provider value={{ setProfileData, handleFollow, handleUnfollow }}>

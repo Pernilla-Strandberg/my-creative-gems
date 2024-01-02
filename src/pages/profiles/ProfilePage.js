@@ -69,6 +69,47 @@ function ProfilePage() {
           />
         </Col>
         <Col lg={6}>
+          {/* Display clickable social media icons based on profile URLs */}
+          {!profile?.facebookUrl && (
+            <UrlButton href={profile?.facebookUrl} icon={"fa-brands fa-facebook-f"}/>
+          )}
+          {profile?.twitterUrl && (
+            <UrlButton href={profile?.twitterUrl} icon={"fa-brands fa-facebook-f"}/>
+
+          )}
+          {profile?.tiktokUrl && (
+            <UrlButton href={profile?.tiktokUrl} icon={"fa-brands fa-facebook-f"}/>
+          )}
+           {profile?.facebookUrl && (
+            <a
+              href={profile?.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fa-brands fa-facebook-f"></i>
+            </a>
+          )}
+          {profile?.twitterUrl && (
+            <a
+              href={profile?.twitterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fa-brands fa-twitter"></i>
+            </a>
+
+          )}
+          {profile?.tiktokUrl && (
+            <a
+              href={profile?.tiktokUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fa-brands fa-tiktok"></i>
+            </a>
+          )}
+        </Col>
+        <Col lg={6}>
           <h3 className="m-2">{profile?.owner}</h3>
           <Row className="justify-content-center no-gutters">
             <Col xs={3} className="my-2">
@@ -144,6 +185,7 @@ function ProfilePage() {
           ) : (
             <Asset spinner />
           )}
+
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
@@ -154,3 +196,15 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
+const UrlButton=(href, icon)=>{
+    console.log("href",href)
+    console.log("icon",icon)
+    return (<a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i className={icon}></i>
+  </a>)
+  }
