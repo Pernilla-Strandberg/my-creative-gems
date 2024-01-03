@@ -57,6 +57,11 @@ function ProfilePage() {
     fetchData();
   }, [id, setProfileData]);
 
+  const handleIconClick = (url) => {
+    const fullUrl = url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
+    window.open(fullUrl, '_blank');
+  };
+  
   const mainProfile = (
     <>
       {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
@@ -67,47 +72,6 @@ function ProfilePage() {
             roundedCircle
             src={profile?.image}
           />
-        </Col>
-        <Col lg={6}>
-          {/* Display clickable social media icons based on profile URLs */}
-          {!profile?.facebookUrl && (
-            <UrlButton href={profile?.facebookUrl} icon={"fa-brands fa-facebook-f"}/>
-          )}
-          {profile?.twitterUrl && (
-            <UrlButton href={profile?.twitterUrl} icon={"fa-brands fa-facebook-f"}/>
-
-          )}
-          {profile?.tiktokUrl && (
-            <UrlButton href={profile?.tiktokUrl} icon={"fa-brands fa-facebook-f"}/>
-          )}
-           {profile?.facebookUrl && (
-            <a
-              href={profile?.facebookUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa-brands fa-facebook-f"></i>
-            </a>
-          )}
-          {profile?.twitterUrl && (
-            <a
-              href={profile?.twitterUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa-brands fa-twitter"></i>
-            </a>
-
-          )}
-          {profile?.tiktokUrl && (
-            <a
-              href={profile?.tiktokUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa-brands fa-tiktok"></i>
-            </a>
-          )}
         </Col>
         <Col lg={6}>
           <h3 className="m-2">{profile?.owner}</h3>
@@ -146,6 +110,21 @@ function ProfilePage() {
             ))}
         </Col>
         {profile?.content && <Col className="p-3">{profile.content}</Col>}
+        {profile?.content_social_facebook && <Col className="p-3"><i
+              className="fa-brands fa-facebook"
+              onClick={() => handleIconClick(profile.content_social_facebook)}
+              title="Facebook profile will open in a new window"
+            ></i></Col>}
+        {profile?.content_social_twitter && <Col className="p-3"><i
+              className="fa-brands fa-twitter"
+              onClick={() => handleIconClick(profile.content_social_twitter)}
+              title="Twitter profile will open in a new window"
+            ></i></Col>}
+        {profile?.content_social_tiktok && <Col className="p-3"><i
+              className="fa-brands fa-tiktok"
+              onClick={() => handleIconClick(profile.content_social_tiktok)}
+              title="Tiktok profile will open in a new window"
+            ></i></Col>}
       </Row>
     </>
   );
@@ -196,15 +175,3 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
-
-const UrlButton=(href, icon)=>{
-    console.log("href",href)
-    console.log("icon",icon)
-    return (<a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <i className={icon}></i>
-  </a>)
-  }

@@ -28,13 +28,13 @@ const ProfileEditForm = () => {
   const [profileData, setProfileData] = useState({
     name: "",
     content: "",
+    content_social_facebook: "",
+    content_social_tiktok: "",
+    content_social_twitter: "",
     image: "",
-    facebookUrl: "",
-    twitterUrl: "",
-    tiktokUrl: "",
   });
 
-  const { name, content, image } = profileData;
+  const { name, content, content_social_facebook, content_social_twitter, content_social_tiktok, image } = profileData;
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -43,8 +43,8 @@ const ProfileEditForm = () => {
       if (currentUser?.profile_id?.toString() === id) {
         try {
           const { data } = await axiosReq.get(`/profiles/${id}/`);
-          const { name, content, image } = data;
-          setProfileData({ name, content, image });
+          const { name, content, content_social_facebook, content_social_twitter, content_social_tiktok, image } = data;
+          setProfileData({ name, content, content_social_facebook, content_social_twitter, content_social_tiktok, image });
         } catch (err) {
         //   console.log(err);
           history.push("/");
@@ -70,9 +70,9 @@ const ProfileEditForm = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("content", content);
-    formData.append("facebookUrl", profileData.facebookUrl);
-    formData.append("twitterUrl", profileData.twitterUrl);
-    formData.append("tiktokUrl", profileData.tiktokUrl);
+    formData.append("content_social_facebook", content_social_facebook);
+    formData.append("content_social_tiktok", content_social_tiktok);
+    formData.append("content_social_twitter", content_social_twitter);
   
     if (imageFile?.current?.files[0]) {
       formData.append("image", imageFile?.current?.files[0]);
@@ -103,35 +103,35 @@ const ProfileEditForm = () => {
           rows={7}
         />
       </Form.Group>
-
-      {/* Social media icons and urls */}
+    {/* Social media icons and urls */}
       <Form.Group>
-        <Form.Label>Facebook Profile URL</Form.Label>
+        <Form.Label>Facebook</Form.Label>
         <Form.Control
-          type="text"
-          value={profileData.facebookUrl}
-          onChange={(e) => handleChange(e)}
-          name="facebookUrl"
+          as="textarea"
+          value={content_social_facebook}
+          onChange={handleChange}
+          name="content_social_facebook"
+          rows={1}
         />
       </Form.Group>
-
       <Form.Group>
-        <Form.Label>Twitter Profile URL</Form.Label>
+        <Form.Label>TikTok</Form.Label>
         <Form.Control
-          type="text"
-          value={profileData.twitterUrl}
-          onChange={(e) => handleChange(e)}
-          name="twitterUrl"
+          as="textarea"
+          value={content_social_tiktok}
+          onChange={handleChange}
+          name="content_social_tiktok"
+          rows={1}
         />
       </Form.Group>
-
       <Form.Group>
-        <Form.Label>TikTok Profile URL</Form.Label>
+        <Form.Label>Twitter</Form.Label>
         <Form.Control
-          type="text"
-          value={profileData.tiktokUrl}
-          onChange={(e) => handleChange(e)}
-          name="tiktokUrl"
+          as="textarea"
+          value={content_social_twitter}
+          onChange={handleChange}
+          name="content_social_twitter"
+          rows={1}
         />
       </Form.Group>
 
