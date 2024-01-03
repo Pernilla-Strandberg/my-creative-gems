@@ -11,9 +11,14 @@ import { axiosRes } from "../../api/axiosDefaults";
 function CommentCreateForm(props) {
   const { post, setPost, setComments, profileImage, profile_id } = props;
   const [content, setContent] = useState("");
+  const [isPrivate, setIsPrivate] = useState(false); // False state for private comments
 
   const handleChange = (event) => {
     setContent(event.target.value);
+  };
+
+  const handleCheckboxChange = () => {
+    setIsPrivate(!isPrivate);
   };
 
   const handleSubmit = async (event) => {
@@ -22,6 +27,8 @@ function CommentCreateForm(props) {
       const { data } = await axiosRes.post("/comments/", {
         content,
         post,
+        recipient: post.owner.username, // Set recipient to the post owner
+        is_private: isPrivate, // Include is_private in the comment creation
       });
       setComments((prevComments) => ({
         ...prevComments,
@@ -36,6 +43,7 @@ function CommentCreateForm(props) {
         ],
       }));
       setContent("");
+      setIsPrivate(false); // Reset checkbox state after submission
     } catch (err) {
     //   console.log(err);
     }
@@ -50,7 +58,7 @@ function CommentCreateForm(props) {
           </Link>
           <Form.Control
             className={styles.Form}
-            placeholder="my comment..."
+            placeholder="My comment..."
             as="textarea"
             value={content}
             onChange={handleChange}
@@ -58,6 +66,13 @@ function CommentCreateForm(props) {
           />
         </InputGroup>
       </Form.Group>
+      <Form.Check
+        type="checkbox"
+        id={`private-checkbox-${post.id}`}
+        label="Private Comment"
+        checked={isPrivate}
+        onChange={handleCheckboxChange}
+      />
       <button
         className={`${styles.Button} btn d-block ml-auto`}
         disabled={!content.trim()}
