@@ -1,7 +1,7 @@
 [![header](https://...header.jpg)]
 
 [View Live Project here](https://my-creative-gems-0b32c514e941.herokuapp.com/)
-[View GitHub Repository](https://github.com/users/Pernilla-Strandberg/projects/4)
+[View GitHub Repository](https://github.com/users/Pernilla-Strandberg/my-creative-gems)
 
 # My Creative Gems
 
