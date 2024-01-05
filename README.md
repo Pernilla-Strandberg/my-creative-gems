@@ -1,11 +1,11 @@
-[![header](https://...header.jpg)]
-
-[View Live Project here](https://my-creative-gems-0b32c514e941.herokuapp.com/)
-[View GitHub Repository](https://github.com/users/Pernilla-Strandberg/my-creative-gems)
-
 # My Creative Gems
 
 My Creative Gems is a community-based publishing platform, based on the app Moments provided by CodeInstitute. It is built for creative enthusiasts in the fields of art, music, writing and crafts. Over time, the platform will be filled with images and content created by the site's users. The site will provide an opportunity for creators to showcase their work, receive valuable feedback, be inspired and learn new approaches and art forms.
+
+![img](https://res.cloudinary.com/dhsebcxo5/image/upload/v1704452658/readme_header_utj37n.png)
+
+[View Live Project here](https://my-creative-gems-0b32c514e941.herokuapp.com/)
+[View GitHub Repository](https://github.com/users/Pernilla-Strandberg/my-creative-gems)
 
 ---
 
